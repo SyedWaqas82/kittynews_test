@@ -14,6 +14,7 @@ const QUERY = gql`
       tagline
       url
       commentsCount
+      votesCount
     }
   }
 `;
@@ -23,6 +24,11 @@ function PostsIndex() {
 
   if (loading) return 'Loading...';
   if (error) return `Error! ${error.message}`;
+
+  function voteHandler()
+  {
+    alert("vote clicked")
+  }
 
   return (
     <div className="box">
@@ -36,7 +42,7 @@ function PostsIndex() {
           </div>
           <div className="tagline">{post.tagline}</div>
           <footer>
-            <button>🔼 0 </button>
+            <button onClick={voteHandler}>🔼 {post.votesCount} </button>
             <button>💬 {post.commentsCount}</button>
           </footer>
         </article>

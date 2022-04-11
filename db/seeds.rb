@@ -45,6 +45,16 @@ Post.create!(
   user: bob,
 )
 
+Vote.create!(
+  post: producthunt,
+  user: bob
+)
+
+Vote.create!(
+  post: producthunt,
+  user: ryan
+)
+
 Comment.create!(
   text: 'Introducing a new experiment...',
   post: producthunt,
@@ -68,3 +78,16 @@ Comment.create!(
   post: angellist,
   user: rado,
 )
+
+# post_test = Post.last()
+# user_test = User.last()
+
+# Vote.create!(
+#   post: post_test,
+#   user: user_test
+# )
+
+# Vote.create!(
+#   post: post_test,
+#   user: user_test
+# )

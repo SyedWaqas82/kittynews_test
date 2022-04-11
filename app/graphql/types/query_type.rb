@@ -1,7 +1,6 @@
 module Types
   class QueryType < Types::BaseObject
     field :posts_all, [PostType], null: false
-
     field :viewer, ViewerType, null: true
 
     def posts_all
