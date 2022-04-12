@@ -1,6 +1,6 @@
 module Types
   class PostType < Types::BaseObject
-    field :id, ID, null: false
+    field :id, Int, null: false
     field :title, String, null: false
     field :tagline, String, null: false
     field :url, String, null: false
