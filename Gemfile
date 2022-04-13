@@ -40,3 +40,5 @@ group :test do
   gem 'webdrivers'
   gem 'database_cleaner'
 end
+
+gem "graphql-batch", "~> 0.5.1"

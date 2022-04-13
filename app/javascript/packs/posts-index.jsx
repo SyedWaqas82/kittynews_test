@@ -16,6 +16,11 @@ const QUERY = gql`
       url
       commentsCount
       votesCount
+      user
+      {
+          id
+          name
+      }
     }
   }
 `;

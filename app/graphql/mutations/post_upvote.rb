@@ -1,12 +1,10 @@
 module Mutations
     class PostUpvote < Mutations::BaseMutation
 
-        argument :post_id, Int, required: true
+        argument :post_id, Integer, required: true
 
         field :post, Types::PostType, null: true
         field :errors, [String], null: false
-    
-        #field :postId, Integer, null: false
 
         def resolve(post_id:)
             require_current_user!
@@ -27,7 +25,7 @@ module Mutations
                     upvote.destroy
                     {
                         post: this_post,
-                        errors: user.errors.full_messages
+                        errors: []
                     }
                 end
             else

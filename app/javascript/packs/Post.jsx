@@ -10,9 +10,6 @@ const UP_VOTE = gql`
       post
       {
         id
-        title
-        tagline
-        commentsCount
         votesCount
       }
       errors
@@ -42,7 +39,7 @@ function Post({post}) {
 
     return (
         <React.Fragment>
-            <article className="post" key={post.id}>
+            <article className="post">
             <h2>
                 <a href={`/posts/${post.id}`}>{post.title}</a>
             </h2>
@@ -52,7 +49,8 @@ function Post({post}) {
             <div className="tagline">{post.tagline}</div>
             <footer>
                 <button onClick={(e) => voteHandler(e)}>🔼 {post.votesCount} </button>
-                <button>💬 {post.commentsCount}</button>
+                {/* <button>💬 {post.commentsCount}</button> */}
+                {post.commentsCount} comments | author:{' '} {post.user.name}
             </footer>
             </article>
         </React.Fragment>
