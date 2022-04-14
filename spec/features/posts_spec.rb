@@ -37,11 +37,12 @@ feature 'Posts' do
 
     click_on post.votes_count
 
+    #expect(page).to have_selector(:link_or_button, '🔼 1')
     expect(page).to have_button('🔼 1')
     #expect(page).to have_button(value: '🔼 1')
   end
 
-  scenario 'simulate downvote', js: true do
+  scenario 'simulate remove vote', js: true do
     post = create :post
     post.votes.create(user: user)
 
@@ -55,6 +56,7 @@ feature 'Posts' do
 
     click_on post.votes_count
 
-    expect(page).to have_button('🔼 0')
+    #expect(page).to have_button('🔼 0')
+    expect(page).to have_selector(:link_or_button, '🔼 0')
   end
 end
