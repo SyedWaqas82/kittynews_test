@@ -56,7 +56,7 @@ feature 'Posts' do
 
     click_on post.votes_count
 
-    #expect(page).to have_button('🔼 0')
-    expect(page).to have_selector(:link_or_button, '🔼 0')
+    expect(page).to have_button('🔼 0')
+    #expect(page).to have_selector(:link_or_button, '🔼 0')
   end
 end
