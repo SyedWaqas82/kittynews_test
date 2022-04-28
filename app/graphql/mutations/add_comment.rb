@@ -1,36 +1,35 @@
 module Mutations
-    class PostUpvote < Mutations::BaseMutation
+    class AddComment < Mutations::BaseMutation
 
         argument :post_id, Integer, required: true
+        argument :commentText, String, required: true
 
-        field :post, Types::PostType, null: true
+        field :comment, Types::CommentType, null: true
         field :errors, [String], null: false
 
-        def resolve(post_id:)
+        def resolve(post_id:, commentText:)
             require_current_user!
             user = context[:current_user]
           
             this_post = Post.find_by(id: post_id)
 
             if this_post.present?
-                 upvote = this_post.votes.new(user: user);
+                 comment = this_post.comments.new(user: user, text: commentText)
           
-                if upvote.save
+                if comment.save
                     {
-                        post: this_post,
+                        comment: comment,
                         errors: []
                     }
                 else
-                    upvote = this_post.votes.find_by(user_id: user.id)
-                    upvote.destroy
                     {
-                        post: this_post,
-                        errors: []
+                        comment: nil,
+                        errors: comment.errors.full_messages
                     }
                 end
             else
                 {
-                    post: nil,
+                    comment: nil,
                     errors: ["record not found"]
                 }
             end

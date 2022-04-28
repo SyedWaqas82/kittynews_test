@@ -4,6 +4,7 @@ import { useQuery } from 'react-apollo';
 import renderComponent from './utils/renderComponent';
 import Post from './Post';
 import Comment from './Comment';
+import AddComment from './AddComment';
 
 const QUERY = gql`
   query GetPost($postId: Int!) {
@@ -43,10 +44,28 @@ function PostsShow({ postId }) {
 
   const post = data.getPost;
 
+  function updateComments(cache, {comment}) {
+    const { getPost } = JSON.parse(JSON.stringify(cache.readQuery({ 
+      query: QUERY, 
+      variables: {postId: postId}})));
+
+      getPost.comments.push(comment);
+      getPost.commentsCount++;
+
+    cache.writeQuery({
+      query: QUERY,
+      variables: {postId: postId},
+      data: { getPost: getPost },
+    });
+  }
+
   return (
     <>
       <div className="box">
         <Post key={post.id} post={post}/>
+      </div>
+      <div className='box'>
+        <AddComment postId={post.id} onCreateComment={updateComments}/>
       </div>
       <div className="box">
         <h3>{post.commentsCount} Comments</h3>
